@@ -230,8 +230,10 @@ class _MyDesktopBodyState extends State<MyDesktopBody> {
     }
     currentNumber = _prevoisNumber.toString();
     text = currentNumber;
+    currentNumber = "";
     if(text == "Infinity"){
       text = 'error';
+      currentNumber = "";
       print('error');
     }
   }

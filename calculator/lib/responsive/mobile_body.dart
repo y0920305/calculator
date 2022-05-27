@@ -14,28 +14,30 @@ class _MyMobileBodyState extends State<MyMobileBody> {
   Widget btn(String btntxt, Color btncolor, Color txtcolor) {
     return Expanded(
         child: Container(
-          alignment: Alignment.center,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: RaisedButton(
-              onPressed: () {
-                calculation(btntxt);
-              },
-              child: Text(
-                '$btntxt',
-                style: TextStyle(
-                  fontSize: 35,
-                  color: (btntxt == selectedOperation && currentNumber == "")
-                      ? btncolor : txtcolor,
-                ),
-              ),
-              shape: CircleBorder(),
+      alignment: Alignment.center,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: RaisedButton(
+          onPressed: () {
+            calculation(btntxt);
+          },
+          child: Text(
+            '$btntxt',
+            style: TextStyle(
+              fontSize: 35,
               color: (btntxt == selectedOperation && currentNumber == "")
-                  ? Colors.white : btncolor,
-              padding: EdgeInsets.all(20.0),
+                  ? btncolor
+                  : txtcolor,
             ),
           ),
-        ));
+          shape: CircleBorder(),
+          color: (btntxt == selectedOperation && currentNumber == "")
+              ? Colors.white
+              : btncolor,
+          padding: EdgeInsets.all(20.0),
+        ),
+      ),
+    ));
   }
 
   @override
@@ -160,7 +162,6 @@ class _MyMobileBodyState extends State<MyMobileBody> {
 
   dynamic text = "0";
 
-
   String previousNumber = "";
   String currentNumber = "";
   String selectedOperation = "";
@@ -228,10 +229,19 @@ class _MyMobileBodyState extends State<MyMobileBody> {
       default:
         break;
     }
-    currentNumber = _prevoisNumber.toString();
+    currentNumber =
+        (_prevoisNumber % 1 == 0 ? _prevoisNumber.toInt() : _prevoisNumber)
+            .toString();
     text = currentNumber;
-    if(text == "Infinity"){
+    currentNumber = "";
+    previousNumber = text;
+    print(previousNumber);
+    print(currentNumber);
+    print(text);
+
+    if (text == "Infinity") {
       text = 'error';
+      currentNumber = "";
       print('error');
     }
   }
